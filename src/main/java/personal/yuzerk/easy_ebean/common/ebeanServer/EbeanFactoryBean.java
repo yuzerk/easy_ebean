@@ -5,7 +5,10 @@ import io.ebean.EbeanServerFactory;
 import io.ebean.config.MatchingNamingConvention;
 import io.ebean.config.ServerConfig;
 import org.springframework.beans.factory.FactoryBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.sql.DataSource;
 //import io.ebean.springsupport.txn.SpringAwareJdbcTransactionManager;
 
 /**
@@ -15,8 +18,8 @@ import org.springframework.stereotype.Component;
 public class EbeanFactoryBean implements FactoryBean<EbeanServer> {
 
   
-//  @Autowired
-//  DataSource dataSource;
+  @Autowired
+  DataSource dataSource;
   
   @Override
   public EbeanServer getObject() throws Exception {
@@ -26,10 +29,11 @@ public class EbeanFactoryBean implements FactoryBean<EbeanServer> {
     //config.setCurrentUserProvider(currentUser);
 
 //    // set the spring's datasource and transaction manager.
-//    config.setDataSource(dataSource);
+    config.setDataSource(dataSource);
 //    config.setExternalTransactionManager(new SpringAwareJdbcTransactionManager());
 
-    config.loadFromProperties();
+    //use the loadFromProperties() will get configeration from ebean.properties file
+//    config.loadFromProperties();
     config.setNamingConvention(new MatchingNamingConvention());
 
     // set as default and register so that Model can be

@@ -22,8 +22,9 @@ public class BaseExceptionHandler {
         return new ResponseEntity<Object>(generateExceptionResult(e, ""), HttpStatus.OK);
     }
 
+    //用来处理所有未被捕获的异常
     @ExceptionHandler(value = Exception.class)
-    public ResponseEntity handlerProtocolMatch(Exception e) {
+    public ResponseEntity handlerNotCatch(Exception e) {
 
         return new ResponseEntity<Object>(generateExceptionResult(e, "500"), HttpStatus.OK);
     }
