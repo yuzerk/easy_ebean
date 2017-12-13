@@ -49,6 +49,7 @@ public class BaseApiTest {
                 setMethod(HttpMethod.POST).
                 setPort(getPort()).
                 setHost(getHost());
+        getTokenFromFile();
         return this;
     }
 
@@ -57,6 +58,7 @@ public class BaseApiTest {
                 .setMethod(HttpMethod.GET)
                 .setPort(getPort())
                 .setHost(getHost());
+        getTokenFromFile();
         return this;
     }
 
@@ -96,13 +98,11 @@ public class BaseApiTest {
     }
 
     public BaseApiTest send() {
-        getTokenFromFile();
         entity = httpDebug.send(String.class);
         return this;
     }
 
     public BaseApiTest send(Class clazz) {
-        getTokenFromFile();
         entity = httpDebug.send(clazz);
         return this;
     }
