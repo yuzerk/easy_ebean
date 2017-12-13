@@ -4,8 +4,11 @@ package personal.yuzerk.easy_ebean.test;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import personal.yuzerk.easy_ebean.result.Result;
 import personal.yuzerk.easy_ebean.test.debug.HttpDebug;
 import personal.yuzerk.easy_ebean.util.JSONUtil;
+
+import java.util.Map;
 
 /**
  * @author yuzk
@@ -67,6 +70,16 @@ public class BaseApiTest {
         return this;
     }
 
+    public BaseApiTest header(String name, String value) {
+        httpDebug.addHeader(name, value);
+        return this;
+    }
+
+    public BaseApiTest token(String value) {
+        httpDebug.addHeader("token", value);
+        return this;
+    }
+
     public BaseApiTest port(Integer port) {
         httpDebug.setPort(port);
         return this;
@@ -83,11 +96,13 @@ public class BaseApiTest {
     }
 
     public BaseApiTest send() {
+        getTokenFromFile();
         entity = httpDebug.send(String.class);
         return this;
     }
 
     public BaseApiTest send(Class clazz) {
+        getTokenFromFile();
         entity = httpDebug.send(clazz);
         return this;
     }
@@ -95,6 +110,16 @@ public class BaseApiTest {
     public void bodyText() {
 
         Object body = entity.getBody();
+        if(httpDebug.getUrl().contains("login")) {
+            Result result = JSONUtil.deserialize((String) body, Result.class);
+            if(result.getRet()<0) {
+                System.out.println(JSONUtil.format((String) body));
+                return;
+            }
+            Map<String, Object> map = (Map<String, Object>)result.getData();
+            String token = (String) map.get("token");
+            writeToken(token);
+        }
         if(body instanceof String) {
             System.out.println(JSONUtil.format((String) body));
             return;
@@ -108,5 +133,16 @@ public class BaseApiTest {
 //        if(body instanceof String) {
 //            System.out.println(XmlUtil.format((String) body));
 //        }
+    }
+
+    private void getTokenFromFile() {
+        String token = TokenFile.read();
+        if(token != null) {
+            token(token);
+        }
+    }
+
+    private void writeToken(String token) {
+        TokenFile.save(token);
     }
 }

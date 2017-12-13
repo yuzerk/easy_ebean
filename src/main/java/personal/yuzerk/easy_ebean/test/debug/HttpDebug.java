@@ -51,6 +51,15 @@ public class HttpDebug extends BaseProsessor {
         return this;
     }
 
+    public HttpDebug addHeader(String name, String value) {
+
+        if(isEmpty(headers)) {
+            defaultHeaders();
+        }
+        headers.add(name,value);
+        return this;
+    }
+
     public HttpDebug setEntity(Object body) {
 
         if(isEmpty(headers)) {
@@ -61,7 +70,7 @@ public class HttpDebug extends BaseProsessor {
     }
 
     public HttpDebug setUrl(String url) {
-        this.url = spliceUrl(url);
+        this.url = url;
         return this;
     }
 
@@ -139,6 +148,7 @@ public class HttpDebug extends BaseProsessor {
             defaultMethod();
         }
         ResponseEntity response = null;
+        this.url = spliceUrl(url);
         try{
             if(method.equals(HttpMethod.GET)) {
                 generateGetUrlWithParams();
@@ -180,6 +190,12 @@ public class HttpDebug extends BaseProsessor {
     private void clear() {
         if(isNotEmpty(params)) {
             params.clear();
+        }
+        if(isNotEmpty(headers)) {
+            headers = null;
+        }
+        if(isNotEmpty(entity)) {
+            entity = null;
         }
         defaultType = MediaType.APPLICATION_JSON_UTF8;
     }

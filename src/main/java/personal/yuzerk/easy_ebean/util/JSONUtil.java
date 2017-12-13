@@ -76,7 +76,7 @@ public class JSONUtil {
         if(!isJsonString(jsonString)) {
             return jsonString;
         }
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Gson gson = new GsonBuilder().setPrettyPrinting().setLenient().serializeNulls().create();
         com.google.gson.JsonParser jp = new com.google.gson.JsonParser();
         JsonElement je = jp.parse(jsonString);
         return gson.toJson(je);

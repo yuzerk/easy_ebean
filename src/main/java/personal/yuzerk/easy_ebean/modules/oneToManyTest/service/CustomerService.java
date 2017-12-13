@@ -64,4 +64,8 @@ public class CustomerService extends BaseService<CustomerDao> {
         result = 1/0;
         return result;
     }
+
+    public void save(Customer customer) {
+        dao.saveOrUpdate(customer);
+    }
 }

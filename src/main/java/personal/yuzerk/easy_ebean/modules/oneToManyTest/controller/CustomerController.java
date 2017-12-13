@@ -28,6 +28,12 @@ public class CustomerController extends BaseController<CustomerService> {
        return success(service.getByName(name));
     }
 
+    @PostMapping("/save")
+    public Result save(@RequestBody  Customer customer) {
+        service.save(customer);
+        return success();
+    }
+
     @PostMapping("/page")
     public Result getPage(@RequestBody MyPagedList<Customer> pagedList) {
 

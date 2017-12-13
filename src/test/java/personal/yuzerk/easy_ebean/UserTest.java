@@ -54,7 +54,15 @@ public class UserTest extends BaseApiTest {
     @Test
     public void cus_get() {
         get("cus/get")
-                .param("name","bob")
+                .param("name","marry")
+                .send()
+                .bodyText();
+    }
+
+    @Test
+    public void cus_save() {
+        post("cus/save")
+                .postBody(new Customer().setName("marry").setSex(1))
                 .send()
                 .bodyText();
     }
@@ -86,5 +94,15 @@ public class UserTest extends BaseApiTest {
     public void XMLformat() {
 //        String a = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Result><code>1</code><message>this is a XML result test response</message></Result>";
 //        System.out.println(XmlUtil.format(a));
+    }
+
+    @Test
+    public void testOther() {
+
+        get("/api/logout")
+                .port(8070)
+                .token("56acaa11cccd465ca4e90abee13d480d")
+                .send()
+                .bodyText();
     }
 }
