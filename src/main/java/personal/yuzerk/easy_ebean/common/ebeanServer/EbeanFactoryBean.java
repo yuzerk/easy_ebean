@@ -36,6 +36,9 @@ public class EbeanFactoryBean implements FactoryBean<EbeanServer> {
 //    config.loadFromProperties();
     config.setNamingConvention(new MatchingNamingConvention());
 
+    // set true means if eq("paramName", null) then sql ignore this condition
+    config.setExpressionEqualsWithNullAsNoop(true);
+
     // set as default and register so that Model can be
     // used if desired for save() and update() etc
     config.setDefaultServer(true);
