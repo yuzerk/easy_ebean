@@ -1,6 +1,7 @@
 package personal.yuzerk.easy_ebean.modules.oneToManyTest.entity;
 
 
+import io.ebean.annotation.Formula;
 import personal.yuzerk.easy_ebean.common.basic.BaseEntity;
 
 import javax.persistence.Entity;
@@ -21,6 +22,9 @@ public class Customer extends BaseEntity {
 
     @OneToMany(mappedBy = "customer")
     List<Contact> contacts;
+
+    @Formula(select = "(select count(*) from contact ct where ct.id = id)")
+    private Integer count;
 
     public String getName() {
         return name;
@@ -46,6 +50,15 @@ public class Customer extends BaseEntity {
 
     public Customer setSex(Integer sex) {
         this.sex = sex;
+        return this;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public Customer setCount(Integer count) {
+        this.count = count;
         return this;
     }
 }

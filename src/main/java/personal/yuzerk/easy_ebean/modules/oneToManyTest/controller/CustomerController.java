@@ -45,4 +45,10 @@ public class CustomerController extends BaseController<CustomerService> {
 
         return success(service.testTransaction(name));
     }
+
+    @GetMapping("/Formula")
+    public Result testFormula(String name) {
+
+        return success(service.findIncludeSizeByName(name));
+    }
 }

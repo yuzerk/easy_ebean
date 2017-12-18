@@ -65,6 +65,10 @@ public class CustomerService extends BaseService<CustomerDao> {
         return result;
     }
 
+    public Customer findIncludeSizeByName(String name) {
+        return dao.findIncludeSizeByName(name);
+    }
+
     public void save(Customer customer) {
         dao.saveOrUpdate(customer);
     }

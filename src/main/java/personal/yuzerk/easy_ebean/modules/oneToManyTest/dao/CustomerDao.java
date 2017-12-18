@@ -42,4 +42,14 @@ public class CustomerDao extends BaseDao<Customer> {
                 .eq("name",name)
                 .delete();
     }
+
+    public Customer findIncludeSizeByName(String name) {
+
+        return createQuery()
+                .select("count")
+                .setDisableLazyLoading(true)
+                .where()
+                .eq("name", name)
+                .findUnique();
+    }
 }
