@@ -50,8 +50,21 @@ public class Contact extends BaseEntity {
         return this;
     }
 
+    public Contact setCustomerName(String name) {
+        if(ValidateUtil.isEmpty(customer)) {
+            customer = new Customer();
+        }
+        customer.setName(name);
+        return this;
+    }
     public String getCustomerId() {
         return customer.getId();
+    }
+    public String getCustomerName() {
+        if(customer == null) {
+            return null;
+        }
+        return customer.getName();
     }
 
 //

@@ -30,4 +30,13 @@ public class ContactDao extends BaseDao<Contact> {
                 .eq("customerId",customerId)
                 .findList();
     }
+
+    public Contact findFetch() {
+
+        return createQuery()
+                .fetch("customer")
+                .where()
+                .eq("type", "email")
+                .findUnique();
+    }
 }

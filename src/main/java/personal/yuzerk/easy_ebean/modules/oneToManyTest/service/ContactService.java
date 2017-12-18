@@ -24,4 +24,8 @@ public class ContactService extends BaseService<ContactDao> {
 
         return dao.findById(id);
     }
+
+    public Contact fetch2Properties() {
+        return dao.findFetch();
+    }
 }

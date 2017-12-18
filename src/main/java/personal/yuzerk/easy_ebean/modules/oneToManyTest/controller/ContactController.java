@@ -1,10 +1,7 @@
 package personal.yuzerk.easy_ebean.modules.oneToManyTest.controller;
 
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import personal.yuzerk.easy_ebean.common.basic.BaseController;
 import personal.yuzerk.easy_ebean.modules.oneToManyTest.service.ContactService;
 import personal.yuzerk.easy_ebean.protocol.ContactProtocol;
@@ -29,5 +26,10 @@ public class ContactController extends BaseController<ContactService> {
     public Result get(String id) {
 
         return success(service.get(id));
+    }
+
+    @GetMapping("/fetch")
+    public Result fetch2Properties() {
+        return success(service.fetch2Properties());
     }
 }
