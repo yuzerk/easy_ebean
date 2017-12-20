@@ -39,4 +39,11 @@ public class ContactDao extends BaseDao<Contact> {
                 .eq("type", "email")
                 .findUnique();
     }
+
+    public void contactChangeCustomerId(String customerId, String id){
+
+        Contact contact = findById(id);
+        contact.setCustomerId(customerId);
+        saveOrUpdate(contact);
+    }
 }

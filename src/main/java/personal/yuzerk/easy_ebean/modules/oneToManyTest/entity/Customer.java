@@ -4,6 +4,7 @@ package personal.yuzerk.easy_ebean.modules.oneToManyTest.entity;
 import io.ebean.annotation.Formula;
 import personal.yuzerk.easy_ebean.common.basic.BaseEntity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -20,7 +21,7 @@ public class Customer extends BaseEntity {
     private String name;
     private Integer sex;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
     List<Contact> contacts;
 
     @Formula(select = "(select count(*) from contact ct where ct.id = id)")

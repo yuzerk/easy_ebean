@@ -3,10 +3,7 @@ package personal.yuzerk.easy_ebean.modules.oneToManyTest.entity;
 import personal.yuzerk.easy_ebean.common.basic.BaseEntity;
 import personal.yuzerk.easy_ebean.util.ValidateUtil;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author yuzk
@@ -19,7 +16,7 @@ public class Contact extends BaseEntity {
     private String type;
     private String typeDetail;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false,cascade = CascadeType.ALL)
     @JoinColumn(name = "customerId")
     private Customer customer;
 //    private String customerId;

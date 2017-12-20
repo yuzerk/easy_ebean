@@ -32,4 +32,10 @@ public class ContactController extends BaseController<ContactService> {
     public Result fetch2Properties() {
         return success(service.fetch2Properties());
     }
+
+    @GetMapping("/change")
+    public Result contactChangeCustomerId(String customerId, String id) {
+        service.contactChangeCustomerId(customerId,id);
+        return success();
+    }
 }

@@ -28,4 +28,8 @@ public class ContactService extends BaseService<ContactDao> {
     public Contact fetch2Properties() {
         return dao.findFetch();
     }
+
+    public void contactChangeCustomerId(String customerId ,String id) {
+        dao.contactChangeCustomerId(customerId, id);
+    }
 }

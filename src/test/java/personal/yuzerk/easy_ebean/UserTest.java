@@ -105,4 +105,13 @@ public class UserTest extends BaseApiTest {
                 .send()
                 .bodyText();
     }
+
+    @Test
+    public void contactChangeCustomerId() {
+        get("/con/change")
+                .param("customerId", "2")
+                .param("id", "asfafa")
+                .send()
+                .bodyText();
+    }
 }
